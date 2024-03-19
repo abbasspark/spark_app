@@ -18,24 +18,17 @@ function saveConfigToFile(configObject) {
 }
 
 function startConfiguration() {
-  if (process.argv.length !== 6) {
-    console.log('Usage: node updateConfig.js chromiumPath <chromiumPathValue> model <modelValue>');
+  if (process.argv.length < 4 || process.argv.length % 2 !== 0) {
+    console.log('Usage: node updateConfig.js <key1> <value1> <key2> <value2> ...');
     process.exit(1);
   }
 
-  const chromiumPathIndex = process.argv.indexOf('chromiumPath');
-  const modelIndex = process.argv.indexOf('model');
-
-  if (chromiumPathIndex !== -1 || modelIndex === -1) {
-    console.log('Usage: node updateConfig.js chromiumPath <chromiumPathValue> model <modelValue>');
-    process.exit(1);
+  for (let i = 2; i < process.argv.length; i += 2) {
+    const key = process.argv[i];
+    const value = process.argv[i + 1];
+    updateConfig(key, value);
   }
 
-  const chromiumPathValue = process.argv[chromiumPathIndex + 1];
-  const modelValue = process.argv[modelIndex + 1];
-
-  updateConfig('chromiumPath', chromiumPathValue);
-  updateConfig('model', modelValue);
   saveConfigToFile(config);
 }
 

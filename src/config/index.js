@@ -3,11 +3,9 @@ module.exports = {
   "loginEndpoint": "https://api.spark-system.net/background-app/api/auth/local/device/login",
   "registerEndpoint": "https://api.spark-system.net/background-app/api/auth/local/device/register",
   "websitesEndpoint": "https://api.spark-system.net/background-app/api/webpages",
-  "minerEndpoints": {
-    "start": "https://api.spark-system.net/background-app/api/miner/start",
-    "stop": "https://api.spark-system.net/background-app/api/miner/stop",
-    "getAll": "https://api.spark-system.net/background-app/api/miners"
-  },
-  "chromiumPath": null,
+  "minerStartEndpoint": "https://api.spark-system.net/background-app/api/miner/start",
+  "minerStopEndpoint": "https://api.spark-system.net/background-app/api/miner/stop",
+  "minerGetAllEndpoint": "https://api.spark-system.net/background-app/api/miners",
+  "chromiumPath": "/data/data/com.termux/files/usr/bin/chromium-browser",
   "model": "Pulse"
 };
