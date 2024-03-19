@@ -17,6 +17,7 @@ const authenticate = async (req, res, next) => {
     res.sendStatus(401);
   }
 };
+
 router.get("/ads/start", authenticate, (req, res) => {
   ads
     .start()

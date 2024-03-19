@@ -1,5 +1,4 @@
 const { AdsService } = require('../services/ads.service');
-const { AuthService } = require('../services/auth.service');
 
 class AdsController {
   constructor() {
