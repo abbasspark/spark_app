@@ -7,7 +7,7 @@ export const loadWebPage = async(webpage:Website) => {
   try {
     // Launch Chromium browser
     const browser = await puppeteerCore.launch({
-      executablePath: '/data/data/com.termux/files/usr/bin/chromium-browser', // Path to your Chromium executable
+      //executablePath: '/data/data/com.termux/files/usr/bin/chromium-browser', // Path to your Chromium executable
       headless: true // Run in headless mode
     });
     const page = await browser.newPage();
