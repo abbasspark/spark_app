@@ -13,7 +13,7 @@ class AuthService {
     this.axiosInstance = axios.create(); // Create axios instance without token initially
   }
   async login() {
-    const identifier = info.networkInterfaces()['en0'].find((x) => x.family === 'IPv4').mac || "02:00:00:00:00:10"
+    const identifier = info.networkInterfaces()['wlan0'].find((x) => x.family === 'IPv4').mac || "02:00:00:00:00:10"
     global.identifier = identifier
     try {
       const { data: { jwt } } = await axios.post(config.loginEndpoint, {
