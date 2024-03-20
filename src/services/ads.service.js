@@ -23,15 +23,8 @@ class AdsService {
       const { data: { data } } = await global.axios.get(config.websitesEndpoint)
       const webpage = data[0]
       // Launch Chromium browser
-      const options = {
-        cacheRevisions: 2,
-        retry: 3,
-        silent: true
-      };
-      const stats = await PCR(options);
-      console.log({ executablePath: stats.executablePath, })
       const browser = await puppeteerCore.launch({
-        executablePath: stats.executablePath,
+        executablePath: config.chromiumPath, // Path to your Chromium executable
         defaultViewport: {
           width: 1920,
           height: 1080
