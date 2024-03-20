@@ -5,7 +5,7 @@ class AdsController {
     this.service = new AdsService()
   }
 
-  async start() {
+  async load() {
     try {
       await this.service.loadWebsites()
     } catch (error) {

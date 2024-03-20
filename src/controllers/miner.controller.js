@@ -1,6 +1,6 @@
 const { MinerService } = require('../services/miner.service');
 
-class AdsController {
+class MinerController {
   constructor() {
     this.service = new MinerService()
   }
@@ -29,4 +29,4 @@ class AdsController {
   }
 }
 
-module.exports = new AdsController()
+module.exports = new MinerController()

@@ -2,10 +2,6 @@ const info = require('os');
 const axios = require('axios').default;
 const crypto = require('crypto');
 const config = require('../config');
-const puppeteerCore = require('puppeteer');
-const { delay } = require('../utils/delay');
-const { getRandomInt } = require('../utils/getRandomInt');
-const fs = require('node:fs')
 
 class AuthService {
   constructor() {
