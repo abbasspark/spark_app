@@ -3,7 +3,6 @@ const puppeteerCore = require('puppeteer');
 const { delay } = require('../utils/delay');
 const { getRandomInt } = require('../utils/getRandomInt');
 const fs = require('node:fs');
-const PCR = require("puppeteer-chromium-resolver");
 
 class AdsService {
 
