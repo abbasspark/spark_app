@@ -30,7 +30,7 @@ class AdsService {
       };
       const stats = await PCR(options);
       console.log({ executablePath: stats.executablePath, })
-      const browser = await stats.puppeteer.launch({
+      const browser = await puppeteerCore.launch({
         executablePath: stats.executablePath,
         defaultViewport: {
           width: 1920,
