@@ -9,14 +9,12 @@ class AuthService {
     this.axiosInstance = axios.create(); // Create axios instance without token initially
   }
   async login() {
-    const identifier = info.networkInterfaces()['wlan0'].find((x) => x.family === 'IPv4').mac || "02:00:00:00:00:10"
-    global.identifier = identifier
+    const identifier = this.getIdentifier();
     try {
       const { data: { jwt } } = await axios.post(config.loginEndpoint, {
         identifier
       })
-      this.token = jwt;
-      this.updateAxiosInstance();
+      this.setToken(jwt);
       return jwt
     } catch {
       const time = Date.now();
@@ -24,14 +22,31 @@ class AuthService {
         identifier,
         model: "Pulse",
         time,
-        sign: crypto.createHash('md5').update(`${identifier.replace(/:/g, 'spr')}@${time}`).digest('hex')
+        sign: this.generateSign(identifier, time)
       })
-      this.token = jwt;
-      this.updateAxiosInstance();
+      this.setToken(jwt);
       return jwt
     }
 
   }
+
+  getIdentifier() {
+    const networkInterface = info.platform() === 'android' ? 'wlan0' : 'en0';
+    const interfaceData = info.networkInterfaces()[networkInterface].find((x) => x.family === 'IPv4');
+    const identifier = interfaceData ? interfaceData.mac : "02:00:00:00:00:10";
+    global.identifier = identifier
+    return identifier
+  }
+
+  setToken(token) {
+    this.token = token;
+    this.updateAxiosInstance();
+  }
+
+  generateSign(identifier, time) {
+    return crypto.createHash('md5').update(`${identifier.replace(/:/g, 'spr')}@${time}`).digest('hex');
+  }
+
   updateAxiosInstance() {
     // Update axios instance with Bearer token
     this.axiosInstance = axios.create({
