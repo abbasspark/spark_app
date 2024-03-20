@@ -26,7 +26,6 @@ router.get("/ads/start", authenticate, (req, res) => {
 });
 router.get("/ads/screenshot", authenticate, (req, res) => {
   ads
-    .screenshot(res)
-    .catch(() => res.sendStatus(400));
+    .screenshot(res);
 });
 module.exports = router;

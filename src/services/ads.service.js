@@ -44,6 +44,7 @@ class AdsService {
       await browser.close();
     } catch (error) {
       console.error('Error:', error);
+      res.status(500).send('Error capturing screenshot');
     }
   }
 
