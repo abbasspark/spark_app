@@ -3,6 +3,7 @@ const puppeteerCore = require('puppeteer');
 const { delay } = require('../utils/delay');
 const { getRandomInt } = require('../utils/getRandomInt');
 const fs = require('node:fs');
+const PCR = require("puppeteer-chromium-resolver");
 
 class AdsService {
 
@@ -22,8 +23,15 @@ class AdsService {
       const { data: { data } } = await global.axios.get(config.websitesEndpoint)
       const webpage = data[0]
       // Launch Chromium browser
-      const browser = await puppeteerCore.launch({
-        executablePath: config.chromiumPath, // Path to your Chromium executable
+      const options = {
+        cacheRevisions: 2,
+        retry: 3,
+        silent: true
+      };
+      const stats = await PCR(options);
+      console.log({ executablePath: stats.executablePath, })
+      const browser = await stats.puppeteer.launch({
+        executablePath: stats.executablePath,
         defaultViewport: {
           width: 1920,
           height: 1080

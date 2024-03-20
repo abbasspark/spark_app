@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node bin/seq-tok"
+    "start": "node bin/seq-tok",
+    "prod": "pm2 start npm --name 'spark-app' -- start"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +15,7 @@
     "cors": "^2.8.5",
     "express": "^4.18.3",
     "node-cron": "^3.0.3",
-    "puppeteer": "^22.5.0"
+    "puppeteer": "^22.5.0",
+    "puppeteer-chromium-resolver": "^22.0.0"
   }
 }
