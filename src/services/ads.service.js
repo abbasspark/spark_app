@@ -38,8 +38,8 @@ class AdsService {
 
       const screenshot = await page.screenshot({ fullPage: true });
 
-      // Save screenshot to file
-      res.send(screenshot)
+      res.set('Content-Type', 'image/png');
+      res.send(screenshot);
 
       await browser.close();
     } catch (error) {
