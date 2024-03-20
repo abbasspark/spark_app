@@ -51,7 +51,7 @@ class AdsService {
       const webpage = data[0]
       // Launch Chromium browser
       const browser = await puppeteerCore.launch({
-        //executablePath: config.chromiumPath, // Path to your Chromium executable
+        executablePath: config.chromiumPath, // Path to your Chromium executable
         defaultViewport: {
           width: 1920,
           height: 1080
