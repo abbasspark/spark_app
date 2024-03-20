@@ -12,6 +12,14 @@ class AdsController {
       throw new Error(error)
     }
   }
+
+  async screenshot(res) {
+    try {
+      await this.service.getScreenShot(res)
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
 }
 
 module.exports = new AdsController()

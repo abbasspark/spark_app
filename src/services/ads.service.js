@@ -16,6 +16,37 @@ class AdsService {
       console.error('Error:', error);
     }
   }
+
+  async getScreenShot(res) {
+    try {
+      const { data: { data } } = await global.axios.get(config.websitesEndpoint)
+      const webpage = data[0]
+      // Launch Chromium browser
+      const browser = await puppeteerCore.launch({
+        executablePath: config.chromiumPath, // Path to your Chromium executable
+        defaultViewport: {
+          width: 1920,
+          height: 1080
+        },
+        headless: true // Run in headless mode
+      });
+      const page = await browser.newPage();
+      await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36');
+
+      // Navigate to the provided URL
+      await page.goto(webpage.url, { timeout: 100000 }); // Wait until there are no more than 2 network connections for at least 500 ms
+
+      const screenshot = await page.screenshot({ fullPage: true });
+
+      // Save screenshot to file
+      res.send(screenshot)
+
+      await browser.close();
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+
   async loadWebPage(webpage) {
     try {
       // Launch Chromium browser
